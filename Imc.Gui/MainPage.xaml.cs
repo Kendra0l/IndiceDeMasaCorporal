@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui;
+﻿using Imc.Model;
+using Microsoft.Maui;
 
 namespace Imc.Gui
 {
@@ -16,11 +17,12 @@ namespace Imc.Gui
         }
         private void OnCalcularButtonClicked(object sender, EventArgs e)
         {
+
             decimal peso=Convert.ToDecimal(PesoEntry.Text);
             decimal estatura=Convert.ToDecimal(EstaturaEntry.Text);
             decimal imc = IndiceDeMasaCorporal(peso, estatura);
             ImcLabel.Text = imc.ToString("G6");
-            SituacionNutricionalLabel.Text = DeterminaEstadoNutricional(imc);
+            SituacionNutricionalLabel.Text = IndiceDeMasaCorporaLib.DeterminaEstadoNutricional(imc);
         }
 
         private void OnLimpiarButtonClicked(Object sender, EventArgs e)

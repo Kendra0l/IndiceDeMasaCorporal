@@ -1,48 +1,28 @@
 ﻿
-//Declaración de variables
-double peso, estatura, imc;
-string estado;
+using Imc.Model;
 
-//Entrada de datos
-Console.WriteLine("Ingresa tu peso en kg: ");
-peso =Convert.ToDouble(Console.ReadLine());
+Console.WriteLine("Aplicación que calcula el indice de masa corporal de una persona\n");
 
-Console.WriteLine("Ingresa tu estatura en metros: ");
-estatura=Convert.ToDouble(Console.ReadLine());
+decimal peso =
+    ReadDecimal("Proporciona el peso en kilogramos de la persona: ");
 
-//Proceso
-imc = CalcularIMC(peso, estatura);
-estado = EstadoNut(imc);
+decimal estatura =
+    ReadDecimal("Proporciona la estatura en metros de la persona: ");
 
-//Salida
-Console.WriteLine("Tu IMC es: " + imc);
-Console.WriteLine("Estado nutricional: " +estado);
+decimal imc = IndiceDeMasaCorporaLib.IndiceDeMasaCorporal(peso, estatura);
 
-//Método que calcula IMC
-static double CalcularIMC(double peso, double estatura)
+Console.WriteLine(
+    $"El índice de masa coporal de la persona es: {imc:G6}");
+Console.WriteLine(
+    $"El estado nutricional de la persona es: {IndiceDeMasaCorporaLib.DeterminaEstadoNutricional(imc)}");
+
+Console.WriteLine();
+
+static decimal ReadDecimal(string indicacion)
 {
-    return peso/(estatura * estatura);
-
+    Console.Write(indicacion);
+    var entradaComoTexto = Console.ReadLine();
+    return Convert.ToDecimal(entradaComoTexto);
 }
 
-//Método que determina el estado nutricional
 
-static string EstadoNut(double imc)
-{
-    if (imc < 18.5)
-    {
-        return "Peso bajo";
-    }
-    else if (imc < 25.0)
-    {
-        return "Peso normal";
-    }
-    else if (imc < 40.0)
-    {
-        return "Obesidad";
-    }
-    else
-    {
-        return "Obesidad extrema";
-    }
-}
